@@ -29,5 +29,5 @@ provider "aws" {
 }
 
 locals {
-  name_prifix = "api-gateway-test"
+  project_name_prifix = "api-gateway-test"
 }
