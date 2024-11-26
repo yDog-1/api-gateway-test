@@ -1,0 +1,46 @@
+name: Frontend app build and push to Amazon ECR
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+    paths:
+      - "api-gateway-test_frontend/**"
+
+defaults:
+  run:
+    shell: bash
+
+jobs:
+  build-and-push:
+    env:
+      AWS_REGION: "ap-northeast-1"
+      AWS_ECR_PUSH_ROLE_ARN: ${{ vars.AWS_ECR_PUSH_ROLE_ARN }}
+      AWS_ECR_REGISTORY: ${{ vars.AWS_ACCOUNT_ID }}.dkr.ecr.ap-northeast-1.amazonaws.com
+      AWS_ECR_FRONTEND: ${{ vars.AWS_ECR_FRONTEND }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v3
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+      - name: Assume Role
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: ${{ env.AWS_ECR_PUSH_ROLE_ARN }}
+          aws-region: ${{env.AWS_REGION}}
+      - name: Login to Docker Hub
+        uses: docker/login-action@v3
+        with:
+          registry: ${{ env.AWS_ECR_REGISTORY }}
+      - name: Build and push API
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          push: true
+          provenance: false
+          file: api-gateway-test_frontend/Dockerfile
+          tags: ${{ env.AWS_ECR_REGISTORY }}/${{ env.AWS_ECR_FRONTEND }}:latest
