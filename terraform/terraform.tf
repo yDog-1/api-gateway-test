@@ -20,7 +20,7 @@ terraform {
 }
 
 provider "aws" {
-  region = "ap-northeast-1"
+  region = local.aws_region
   default_tags {
     tags = {
       type = "learn"
@@ -29,5 +29,6 @@ provider "aws" {
 }
 
 locals {
+  aws_region          = "ap-northeast-1"
   project_name_prefix = "api_gateway_test"
 }
