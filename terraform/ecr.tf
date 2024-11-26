@@ -13,3 +13,10 @@ resource "aws_ecr_repository" "backend" {
     scan_on_push = true
   }
 }
+
+locals {
+  ecr_repositories = [
+    aws_ecr_repository.frontend.arn,
+    aws_ecr_repository.backend.arn
+  ]
+}
