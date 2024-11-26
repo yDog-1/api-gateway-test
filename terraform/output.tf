@@ -5,7 +5,9 @@ output "frontend_ecr" {
 }
 
 output "backend_ecr" {
-  description = "バックエンド用のECRリポジトリURL"
-  value       = aws_ecr_repository.backend.repository_url
-  sensitive   = true
+}
+
+output "ecr_push_role_arn" {
+  description = "GitHub ActionsからECRにイメージをプッシュするためのIAMロールのARN"
+  value       = aws_iam_role.ecr_push.arn
 }
