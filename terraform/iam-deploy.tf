@@ -21,9 +21,9 @@ data "aws_iam_policy_document" "ecr_push_assume" {
     }
     condition {
       # リポジトリとブランチの指定
-      test     = "StringLike"
+      test     = "StringEquals"
       variable = "token.actions.githubusercontent.com:sub"
-      values   = ["repo:${var.git_author}/${var.git_repo}:ref/heads/main"]
+      values   = ["repo:${var.git_author}/${var.git_repo}:ref:refs/heads/main"]
     }
   }
 }
