@@ -43,6 +43,13 @@ data "aws_iam_policy_document" "ecr_push_policy" {
     ]
     resources = local.ecr_repositories
   }
+  statement {
+    effect = "Allow"
+    actions = [
+      "ecr:GetAuthorizationToken"
+    ]
+    resources = ["*"]
+  }
 }
 
 # GitHub ActionsからECRにイメージをプッシュするためのIAMロール
