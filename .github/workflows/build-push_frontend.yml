@@ -43,8 +43,7 @@ jobs:
       - name: Build and push API
         uses: docker/build-push-action@v6
         with:
-          context: .
+          context: ./api-gateway-test_frontend
           push: true
           provenance: false
-          file: api-gateway-test_frontend/Dockerfile
           tags: ${{ env.AWS_ECR_REGISTORY }}/${{ env.AWS_ECR_FRONTEND }}:latest
