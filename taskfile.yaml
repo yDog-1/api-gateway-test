@@ -1,8 +1,40 @@
 version: '3'
 
+vars:
+  TF_DIR: terraform
+  TF_VAR: terraform.tfvars
+  TF_BE: config.s3.tfbackend
+
+env:
+  TF_GLOBAL_OPS: -chdir={{.TF_DIR}}
+  TF_VAR_FILE: -var-file={{.TF_VAR}}
+  TF_BE_CFG: -backend-config={{.TF_BE}}
+
 tasks:
-  tf:
+  default:
+    desc: list all tasks
     cmds:
-      - terraform -chdir=terraform {{.CLI_ARGS}}
+      - task --list-all
+    silent: true
+
+  terraform:init:
+    aliases: [ti]
+    desc: terraform init
+    cmds:
+      - terraform $TF_GLOBAL_OPS init $TF_BE_CFG
+    silent: true
+
+  terraform:plan:
+    aliases: [tp]
+    desc: terraform plan
+    cmds:
+      - terraform $TF_GLOBAL_OPS plan $TF_VAR_FILE
+    silent: true
+
+  terraform:apply:
+    aliases: [ta]
+    desc: terraform apply
+    cmds:
+      - terraform $TF_GLOBAL_OPS apply $TF_VAR_FILE
     silent: true
     interactive: true
