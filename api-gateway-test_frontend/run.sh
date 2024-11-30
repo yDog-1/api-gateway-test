@@ -2,4 +2,4 @@
 
 [ ! -d '/tmp/cache' ] && mkdir -p /tmp/cache
 
-exec node server.js
+exec bun run --bun server.js
