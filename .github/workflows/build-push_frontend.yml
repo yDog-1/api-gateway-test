@@ -49,7 +49,7 @@ jobs:
         with:
           context: "{{defaultContext}}:api-gateway-test_frontend"
           push: true
-          provenance: false
+          provenance: false # https://stackoverflow.com/questions/65608802/cant-deploy-container-image-to-lambda-function
           cache-from: type=gha # GitHub Actions cache
           cache-to: type=gha,mode=max # 全てのレイヤーをキャッシュ
           tags: ${{ env.AWS_ECR_REGISTORY }}/${{ env.AWS_ECR_FRONTEND }}:latest
