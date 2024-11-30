@@ -4,7 +4,7 @@ FROM oven/bun:1.1-distroless AS base
 FROM base AS deps
 WORKDIR /app
 COPY package.json bun.lockb ./
-RUN bun install --production --frozen-lockfile
+RUN bun install --frozen-lockfile
 
 FROM base AS builder
 WORKDIR /app
