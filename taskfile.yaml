@@ -40,9 +40,17 @@ tasks:
     silent: true
     interactive: true
 
-  docker:build:
-    aliases: [db]
+  frontend:docker:build:
+    aliases: [fdb]
     desc: docker build
     cmds:
-      - docker build -t api_gateway_test_frontend ./{{.FR_DIR}}
+      - docker build -t {{.FR_DIR}} ./{{.FR_DIR}}
+    silent: true
+
+  frontend:dev:
+    aliases: [fd]
+    desc: bun run dev
+    dir: '{{.FR_DIR}}'
+    cmds:
+      - bun run dev
     silent: true
