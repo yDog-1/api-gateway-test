@@ -7,7 +7,6 @@ vars:
   FR_DIR: api-gateway-test_frontend
 
 env:
-  TF_GLOBAL_OPS: -chdir={{.TF_DIR}}
   TF_VAR_FILE: -var-file={{.TF_VAR}}
   TF_BE_CFG: -backend-config={{.TF_BE}}
 
@@ -21,22 +20,25 @@ tasks:
   terraform:init:
     aliases: [ti]
     desc: terraform init
+    dir: '{{.TF_DIR}}'
     cmds:
-      - terraform $TF_GLOBAL_OPS init $TF_BE_CFG
+      - terraform init $TF_BE_CFG
     silent: true
 
   terraform:plan:
     aliases: [tp]
     desc: terraform plan
+    dir: '{{.TF_DIR}}'
     cmds:
-      - terraform $TF_GLOBAL_OPS plan $TF_VAR_FILE
+      - terraform plan $TF_VAR_FILE
     silent: true
 
   terraform:apply:
     aliases: [ta]
     desc: terraform apply
+    dir: '{{.TF_DIR}}'
     cmds:
-      - terraform $TF_GLOBAL_OPS apply $TF_VAR_FILE
+      - terraform apply $TF_VAR_FILE
     silent: true
     interactive: true
 
@@ -52,5 +54,5 @@ tasks:
     desc: bun run dev
     dir: '{{.FR_DIR}}'
     cmds:
-      - bun run dev
+      - bun run --bun dev
     silent: true
