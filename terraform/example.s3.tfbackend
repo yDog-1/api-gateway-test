@@ -1,0 +1,4 @@
+bucket     = "xxxxx-bucket"
+access_key = "xxxxx"
+secret_key = "xxxxx"
+endpoints  = { s3 = "https://xxxxx.r2.cloudflarestorage.com" }
