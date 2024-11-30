@@ -4,6 +4,7 @@ vars:
   TF_DIR: terraform
   TF_VAR: terraform.tfvars
   TF_BE: config.s3.tfbackend
+  FR_DIR: api-gateway-test_frontend
 
 env:
   TF_GLOBAL_OPS: -chdir={{.TF_DIR}}
@@ -38,3 +39,10 @@ tasks:
       - terraform $TF_GLOBAL_OPS apply $TF_VAR_FILE
     silent: true
     interactive: true
+
+  docker:build:
+    aliases: [db]
+    desc: docker build
+    cmds:
+      - docker build -t api_gateway_test_frontend ./{{.FR_DIR}}
+    silent: true
