@@ -29,6 +29,7 @@ provider "aws" {
 }
 
 locals {
-  aws_region          = "ap-northeast-1"
-  project_name_prefix = "api_gateway_test"
+  aws_region                = "ap-northeast-1"
+  project_name_prefix       = "api_gw_test"
+  kebab_project_name_prefix = replace(local.project_name_prefix, "_", "-")
 }

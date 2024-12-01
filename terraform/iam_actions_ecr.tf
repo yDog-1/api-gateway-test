@@ -54,11 +54,12 @@ data "aws_iam_policy_document" "ecr_push_policy" {
 
 # GitHub ActionsからECRにイメージをプッシュするためのIAMロール
 resource "aws_iam_role" "ecr_push" {
-  name               = "${local.project_name_prefix}_ecr_push_role"
+  name               = "${local.kebab_project_name_prefix}-ecr-push-role"
   assume_role_policy = data.aws_iam_policy_document.ecr_push_assume.json
 }
 resource "aws_iam_policy" "ecr_push_policy" {
-  name   = "${local.project_name_prefix}_ecr_push_policy"
+  name   = "${local.kebab_project_name_prefix}-ecr-push-policy"
+  path   = "/${local.kebab_project_name_prefix}/"
   policy = data.aws_iam_policy_document.ecr_push_policy.json
 }
 resource "aws_iam_role_policy_attachment" "ecr_push" {

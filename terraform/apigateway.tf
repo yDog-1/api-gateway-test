@@ -1,5 +1,5 @@
 resource "aws_apigatewayv2_api" "frontend" {
-  name          = "${local.project_name_prefix}_frontend_api"
+  name          = "${local.kebab_project_name_prefix}-frontend_api"
   protocol_type = "HTTP"
 }
 

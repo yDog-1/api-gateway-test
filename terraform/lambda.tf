@@ -1,5 +1,5 @@
 resource "aws_lambda_function" "frontend" {
-  function_name = "${local.project_name_prefix}_frontend"
+  function_name = "${local.kebab_project_name_prefix}-frontend"
   role          = aws_iam_role.frontend_lambda_execution_role.arn
   package_type  = "Image"
   image_uri     = "${aws_ecr_repository.frontend.repository_url}:latest"

@@ -1,5 +1,5 @@
 resource "aws_ecr_repository" "frontend" {
-  name = "${local.project_name_prefix}_frontend"
+  name = "${local.kebab_project_name_prefix}-frontend"
 
   image_scanning_configuration {
     scan_on_push = true
@@ -7,7 +7,7 @@ resource "aws_ecr_repository" "frontend" {
 }
 
 resource "aws_ecr_repository" "backend" {
-  name = "${local.project_name_prefix}_backend"
+  name = "${local.kebab_project_name_prefix}-backend"
 
   image_scanning_configuration {
     scan_on_push = true
