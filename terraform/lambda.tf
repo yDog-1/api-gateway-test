@@ -12,11 +12,10 @@ resource "aws_lambda_function" "frontend" {
 }
 
 resource "aws_lambda_permission" "frontend_allow_apigateway" {
-  statement_id  = "AllowExecutionFromAPIGateway"
   action        = "lambda:InvokeFunction"
   function_name = aws_lambda_function.frontend.function_name
   principal     = "apigateway.amazonaws.com"
-  source_arn    = aws_apigatewayv2_api.frontend.execution_arn
+  source_arn    = "${aws_apigatewayv2_api.frontend.execution_arn}/*/$default"
 }
 
 # resource "aws_lambda_function" "backend" {
