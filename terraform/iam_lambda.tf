@@ -14,6 +14,7 @@ data "aws_iam_policy_document" "lambda_assume_role" {
 # Lambda実行ロール
 resource "aws_iam_role" "frontend_lambda_execution_role" {
   name               = "${local.kebab_project_name_prefix}-frontend-lambda-execution"
+  path               = "/${local.kebab_project_name_prefix}/lambda/"
   assume_role_policy = data.aws_iam_policy_document.lambda_assume_role.json
 }
 
