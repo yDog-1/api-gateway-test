@@ -42,6 +42,14 @@ tasks:
     silent: true
     interactive: true
 
+  terraform:output:
+    aliases: [to]
+    desc: terraform output
+    dir: '{{.TF_DIR}}'
+    cmds:
+      - terraform output
+    silent: true
+
   frontend:docker:build:
     aliases: [fdb]
     desc: docker build
